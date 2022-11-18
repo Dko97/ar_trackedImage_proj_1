@@ -19,6 +19,7 @@ public class EventsController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+
     #region LineRendererEvents
     public event Action<Vector3,Vector3> AddLineEvent;
     public event Action<bool> LineState;

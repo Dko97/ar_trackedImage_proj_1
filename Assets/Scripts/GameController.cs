@@ -50,11 +50,12 @@ public class GameController : MonoBehaviour
         spawnedPrefab = GameObject.Instantiate(placeablePrefab);
         spawnedPrefab.name = "TrackedCube";
         spawnedPrefab.SetActive(false);
+
         #region TestCode // Commented
-        /*if (test)
+        if (test)
         {
             StartCoroutine(setCubeActiveRoutine());
-        }*/
+        }
         #endregion
     }
 
@@ -90,7 +91,7 @@ public class GameController : MonoBehaviour
                 Vector3 position = trackedImage.transform.position;
                 spawnedPrefab.transform.position = position;
                 // move line renderer position
-                EventsController.instance.StartAddLineEvent(spawnedPrefab.transform.position, RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, RendererButton.transform).center);
+                EventsController.instance.StartAddLineEvent(spawnedPrefab.transform.position, RendererButton.transform.GetChild(1).transform.position);//RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, RendererButton.transform).center);
             }
         }
         else
@@ -106,7 +107,7 @@ public class GameController : MonoBehaviour
     
     public IEnumerator setCubeActiveRoutine()
     {
-        DebugText.text = "Inside setCubeActiveRoutine";
+        DebugText.text = " ";
         coroutineRunning = true;
         float val = 0;
         Material mat = spawnedPrefab.GetComponent<MeshRenderer>().material;
@@ -123,7 +124,7 @@ public class GameController : MonoBehaviour
 
         mat.SetFloat("_Effect", 0);
         // line renderer part
-        EventsController.instance.StartAddLineEvent(spawnedPrefab.transform.position, RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, RendererButton.transform).center);
+        EventsController.instance.StartAddLineEvent(spawnedPrefab.transform.position, RendererButton.transform.GetChild(1).transform.position);//RectTransformUtility.CalculateRelativeRectTransformBounds(canvas.transform, RendererButton.transform.GetChild(1).transform).center);
         EventsController.instance.SetLineState(true);
         yield return null;
     }
